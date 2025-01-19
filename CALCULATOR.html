@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Calculator</title>
+  <style>
+   
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+    }
+
+    
+    .calculator {
+      background: #ffffff;
+      width: 340px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+   
+    .display {
+      background: #212121;
+      color: #ffffff;
+      text-align: right;
+      padding: 20px;
+      font-size: 1.5em;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .display input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 2em;
+      outline: none;
+    }
+
+  
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+
+   
+    button {
+      background: linear-gradient(145deg, #f2f2f2, #d9d9d9);
+      border: none;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      font-size: 1.2em;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.7);
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+    }
+
+   
+    button:nth-child(4n),
+    button:nth-child(1),
+    button:nth-child(2) {
+      background: linear-gradient(145deg, #f57c00, #f9a825);
+      color: #ffffff;
+    }
+
+    button:nth-child(4n):hover,
+    button:nth-child(1):hover,
+    button:nth-child(2):hover {
+      transform: translateY(-2px);
+      background: linear-gradient(145deg, #f9a825, #f57c00);
+    }
+
+    button:nth-child(4n):active,
+    button:nth-child(1):active,
+    button:nth-child(2):active {
+      background: linear-gradient(145deg, #e65100, #ff9800);
+    }
+
+    
+    button:nth-last-child(1) {
+      background: linear-gradient(145deg, #6a11cb, #2575fc);
+      color: #ffffff;
+    }
+
+    button:nth-last-child(1):hover {
+      background: linear-gradient(145deg, #2575fc, #6a11cb);
+    }
+
+    button:nth-last-child(1):active {
+      background: linear-gradient(145deg, #4b0082, #0000ff);
+    }
+  </style>
+</head>
+<body>
+  <
+  <div class="calculator">
+    <div class="display">
+      <input type="text" id="result" disabled />
+    </div>
+    <div class="buttons">
+      <!-- Row 1 -->
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="backspace()">⌫</button>
+      <button onclick="appendValue('(')">(</button>
+      <button onclick="appendValue('/')">÷</button>
+      <!-- Row 2 -->
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('*')">×</button>
+      <!-- Row 3 -->
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('-')">−</button>
+      <!-- Row 4 -->
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('+')">+</button>
+      <!-- Row 5 -->
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for calculator functionality
+
+    // Append a value to the display
+    function appendValue(value) {
+      const resultField = document.getElementById("result");
+      resultField.value += value;
+    }
+
+    // Clear the entire display
+    function clearDisplay() {
+      document.getElementById("result").value = "";
+    }
+
+    // Backspace: Remove the last character
+    function backspace() {
+      const resultField = document.getElementById("result");
+      resultField.value = resultField.value.slice(0, -1);
+    }
+
+    // Calculate the result
+    function calculateResult() {
+      const resultField = document.getElementById("result");
+      try {
+        resultField.value = eval(resultField.value);
+      } catch (error) {
+        resultField.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
